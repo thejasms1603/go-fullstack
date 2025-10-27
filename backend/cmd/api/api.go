@@ -8,11 +8,13 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
+	"github.com/thejasms1603/go-fullstack/backend/internal/store"
 )
 
 
 type application struct {
 	config Config
+	store store.Storage
 }
 
 

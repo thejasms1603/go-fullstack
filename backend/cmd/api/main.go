@@ -5,6 +5,7 @@ import (
 
 	"github.com/joho/godotenv"
 	"github.com/thejasms1603/go-fullstack/backend/internal/env"
+	"github.com/thejasms1603/go-fullstack/backend/internal/store"
 )
 
 	func main() {
@@ -12,11 +13,11 @@ import (
 		if err != nil {
 			log.Println("Error loading .env file")
 		}
-		port := env.GetString("PORT", ":8080")
 		cfg:= Config{
-			addr:port,
+			addr: env.GetString("ADDR", ":8080"),
 		}
-		app:= &application{config: cfg}
+		store:= store.NewStorage(nil)
+		app:= &application{config: cfg, store: store}
 		httpMux := app.mountRoutes()
 		log.Fatal(app.run(httpMux))
 	}
